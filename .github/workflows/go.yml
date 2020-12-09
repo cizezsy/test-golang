@@ -28,9 +28,25 @@ jobs:
       run: go build -v ./...
     - name: Test
       run: go test -v ./...
+  scan:
+    name: Scan
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Scan Codes
+      run: |
+        echo "fake scan"
+  sec:
+    name: Security Scan
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Scan Security Vulnerabilities in Codes
+      run: |
+        echo "fake sec scan"
   post:
     name: Post
-    needs: build
+    needs: [scan, sec]
     runs-on: ubuntu-latest
     steps:
     - name: Hello
